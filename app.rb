@@ -67,7 +67,7 @@ def table_to_rows_and_columns(table)
   row_elements.each do |row|
     header_elements = row.search('//th')
     if header_elements.size > 0
-      rows << header_elements.map(&:inner_text)
+      rows << header_elements.map{|h| h.inner_text}
       has_header = true
     end
     
@@ -80,7 +80,7 @@ def table_to_rows_and_columns(table)
       return [], has_header if row_elements.size != column_count
     end
     
-    rows << row_elements.map(&:inner_text)
+    rows << row_elements.map{|r| r.inner_text}
   end
   
   lines = []
