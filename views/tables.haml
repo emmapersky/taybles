@@ -1,0 +1,17 @@
+%html
+  %head
+  
+  %body
+    %h1=@title
+    
+    %ul
+      - @tables.each do |table|
+        %li
+          %table
+            - table.each_with_index do |row, row_index|
+              %tr
+                - row.each_with_index do |col, col_index|
+                  - if row_index == 0 and @table_headers[0]
+                    %th=col
+                  - else
+                    %td=col
