@@ -31,12 +31,16 @@ get '/tables/*' do
   tables = doc.search('//table')
   @tables = []
   @table_headers = []
-  tables.each do |table|
+  @table_id = []
+  tables.each_with_index do |table, table_index|
     table_data, has_header = table_to_rows_and_columns(table)
     next if table_data.size == 0
     @tables << table_data
     @table_headers << has_header
+    @table_id << table_index
   end
+  url.gsub!(/http:\//, 'http://') unless url.match(/http:\/\//)
+  @url = url
   @title = doc.search('//title').inner_text.gsub(/ - Wikipedia, the free encyclopedia/, '')
   haml :tables
 end

@@ -5,8 +5,10 @@
     %h1=@title
     
     %ul
-      - @tables.each do |table|
+      - @tables.each_with_index do |table, table_index|
         %li
+          %a{:href => "/tables/#{@url}/#{@table_id[table_index]}.csv"}
+            Download as CSV
           %table
             - table.each_with_index do |row, row_index|
               %tr
