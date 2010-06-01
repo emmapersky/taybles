@@ -43,7 +43,7 @@ end
 
 def read_url(url)
   raise Exception, "Need a URL" unless url
-  
+  url.gsub(/http:\//, 'http://') if url.match(/http:\//) and not url.match(/http:\/\//)
   uri = URI.parse(url)
   begin
     data = uri.read
